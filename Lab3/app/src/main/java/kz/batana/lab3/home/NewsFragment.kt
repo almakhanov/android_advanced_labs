@@ -2,8 +2,10 @@ package kz.batana.lab3.home
 
 
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -34,7 +36,11 @@ class NewsFragment : Fragment(), HomeContract.View, NewsAdapter.NewsItemClicked 
     }
 
     override fun setNewsList(newsList: ArrayList<News>) {
-        recycler_news.layoutManager = LinearLayoutManager(activity)
+        if (context?.resources?.configuration?.orientation== Configuration.ORIENTATION_LANDSCAPE) {
+            recycler_news.layoutManager = GridLayoutManager(context,2)
+        } else{
+            recycler_news.layoutManager = LinearLayoutManager(context)
+        }
         recycler_news.adapter = NewsAdapter(activity!!, newsList, this)
     }
 
