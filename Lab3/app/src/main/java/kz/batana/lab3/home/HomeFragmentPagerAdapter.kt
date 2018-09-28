@@ -19,5 +19,6 @@ class HomeFragmentPagerAdapter(manager: FragmentManager) : FragmentPagerAdapter(
     fun addFragment (fragment: Fragment, title : String) {
         fragments.add(fragment)
         titles.add(title)
+        notifyDataSetChanged()
     }
 }

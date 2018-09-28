@@ -8,11 +8,13 @@
 
     <android.support.design.widget.TabLayout
         android:id="@+id/tab_layout_home"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:tabTextColor="@color/colorWhite"
+        android:background="@color/colorPrimary"
+        app:tabIndicatorColor="@color/colorWhite"
+        android:elevation="8dp"
         app:layout_constraintBottom_toTopOf="@id/view_pager_home">
     </android.support.design.widget.TabLayout>
 

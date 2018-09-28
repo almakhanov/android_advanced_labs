@@ -138,7 +138,9 @@
         android:layout_margin="@dimen/activity_horizontal_margin"
         android:src="@drawable/ic_favorite_border_white_24dp"
         app:layout_anchor="@id/main.appbar"
+        app:elevation="8dp"
         android:backgroundTint="@color/colorDetailsLike"
+        app:backgroundTint="@color/colorDetailsLike"
         app:layout_anchorGravity="bottom|right|end" />
 
 </android.support.design.widget.CoordinatorLayout>

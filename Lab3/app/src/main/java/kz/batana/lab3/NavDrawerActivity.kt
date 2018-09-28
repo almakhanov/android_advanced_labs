@@ -14,7 +14,6 @@ import android.view.MenuItem
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_nav_drawer.*
 import kz.batana.lab3.home.HomeFragment
-import kz.batana.lab3.home.NewsFragment
 
 class NavDrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -46,8 +45,8 @@ class NavDrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             this.title = resources.getString(R.string.app_name)
         }
 
-//        homeFragment = HomeFragment.newInstance()
-//        createFragment(homeFragment, R.id.container_main)
+        homeFragment = HomeFragment.newInstance()
+        createFragment(homeFragment, R.id.container_main)
     }
 
 
@@ -58,7 +57,7 @@ class NavDrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                     this.title = resources.getString(R.string.app_name)
                 }
                 homeFragment = HomeFragment.newInstance()
-                createFragment(NewsFragment.newInstance(), R.id.container_main)
+                createFragment(homeFragment, R.id.container_main)
             }
             R.id.nav_fav -> { }
             R.id.nav_rate -> { }

@@ -3,7 +3,6 @@ package kz.batana.lab3.home
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,11 +19,15 @@ class HomeFragment : Fragment() {
         fun newInstance() = HomeFragment()
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
 
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_home, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         //View pager fragments
-        cleanChildFragments(childFragmentManager)
         val adapter = HomeFragmentPagerAdapter(childFragmentManager)
         recentNewsFragment = NewsFragment.newInstance()
         categoryFragment = CategoryFragment.newInstance()
@@ -33,22 +36,6 @@ class HomeFragment : Fragment() {
         adapter.addFragment(categoryFragment, resources.getString(R.string.tab_title2))
         view_pager_home.adapter = adapter
         tab_layout_home.setupWithViewPager(view_pager_home)
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_home, container, false)
-    }
-
-    private fun cleanChildFragments(childFragmentManager: FragmentManager) {
-        val childFragments = childFragmentManager.fragments
-        if (!childFragments.isEmpty()) {
-            val ft = childFragmentManager.beginTransaction()
-            for (fragment in childFragments) {
-                ft.remove(fragment)
-            }
-            ft.commit()
-        }
     }
 
 
