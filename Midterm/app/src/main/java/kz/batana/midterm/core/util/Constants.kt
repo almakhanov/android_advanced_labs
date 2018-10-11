@@ -8,4 +8,5 @@ object Constants{
     const val EMPTY = "EMPTY"
     const val USER = "USER"
     const val NEWS_LIST = "NEWS_LIST"
+    const val URL = "https://jsonplaceholder.typicode.com/"
 }

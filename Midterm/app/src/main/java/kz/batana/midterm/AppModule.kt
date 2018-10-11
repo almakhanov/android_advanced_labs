@@ -9,6 +9,7 @@ import kz.batana.lab3.core.local_storage.AppLocalDatabase
 import kz.batana.lab3.core.local_storage.SharedPref
 import kz.batana.lab3.core.local_storage.SharedPrefImpl
 import kz.batana.lab3.home.news.NewsDao
+import kz.batana.midterm.main.mainModule
 import kz.darlogistics.courier.core.coreModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module.Module
@@ -17,7 +18,8 @@ import org.koin.dsl.module.module
 val appModules: List<Module>
     get() = listOf(
             localStorageModules,
-            coreModule
+            coreModule,
+            mainModule
     )
 
 val localStorageModules = module {
