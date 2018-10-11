@@ -1,6 +1,7 @@
-package kz.batana.lab3.home
+package kz.batana.lab3.home.news
 
 
+import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
@@ -10,11 +11,15 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_news.*
 import kz.batana.khanproject.Logger
 import kz.batana.lab3.R
+import kz.batana.lab3.core.Constants
 import kz.batana.lab3.core.Constants.NEWS
-import kz.batana.lab3.home.entity.News
+import kz.batana.lab3.core.entity.News
+import kz.batana.lab3.home.HomeContract
+import kz.batana.lab3.home.news_form.NewsFormActivity
 import kz.batana.lab3.news_details.NewsDetailsActivity
 import org.koin.android.ext.android.inject
 import java.io.Serializable
@@ -33,6 +38,20 @@ class NewsFragment : Fragment(), HomeContract.View, NewsAdapter.NewsItemClicked 
         super.onViewCreated(view, savedInstanceState)
         presenter.attachView(this)
         presenter.getNewList()
+
+        fab_add_news.setOnClickListener{ fab ->
+//            Snackbar.make(fab, "News is created!", Snackbar.LENGTH_SHORT)
+//                    .show()
+//
+//            presenter.addNews()
+
+            startActivityForResult(Intent(activity, NewsFormActivity::class.java), 1)
+        }
+
+    }
+
+    override fun msg(message: String) {
+        Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
     }
 
     override fun setNewsList(newsList: ArrayList<News>) {
@@ -55,6 +74,19 @@ class NewsFragment : Fragment(), HomeContract.View, NewsAdapter.NewsItemClicked 
         @JvmStatic
         fun newInstance() = NewsFragment()
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode == 1){
+            if(resultCode == RESULT_OK){
+                val news = data?.getSerializableExtra(Constants.NEWS) as News
+                presenter.addNews(news)
+            }
+        }
+    }
+
+
+
 
 
 }

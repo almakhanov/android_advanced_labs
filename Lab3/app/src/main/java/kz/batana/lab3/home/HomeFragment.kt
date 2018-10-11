@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_home.*
 import kz.batana.lab3.R
+import kz.batana.lab3.home.news.NewsFragment
 
 class HomeFragment : Fragment() {
 

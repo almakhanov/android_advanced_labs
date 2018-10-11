@@ -1,4 +1,4 @@
-package kz.batana.lab3.home
+package kz.batana.lab3.home.news
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_news.view.*
 import kz.batana.lab3.R
-import kz.batana.lab3.home.entity.News
+import kz.batana.lab3.core.entity.News
 
 class NewsAdapter(private val context : Context,
                   private val items : ArrayList<News>,

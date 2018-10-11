@@ -6,7 +6,7 @@ import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_news_details.*
 import kz.batana.lab3.R
 import kz.batana.lab3.core.Constants.NEWS
-import kz.batana.lab3.home.entity.News
+import kz.batana.lab3.core.entity.News
 
 class NewsDetailsActivity : AppCompatActivity() {
 

@@ -2,6 +2,7 @@ package kz.batana.lab3
 
 import android.app.AlertDialog
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
@@ -11,18 +12,29 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.TextView
 import android.widget.Toast
-import kotlinx.android.synthetic.main.activity_nav_drawer.*
+import kotlinx.android.synthetic.main.activity_main.*
+import kz.batana.khanproject.Logger
+import kz.batana.lab3.auth.LoginActivity
+import kz.batana.lab3.core.Constants
+import kz.batana.lab3.core.entity.User
+import kz.batana.lab3.core.local_storage.SharedPref
 import kz.batana.lab3.home.HomeFragment
+import org.koin.android.ext.android.inject
 
-class NavDrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener{
 
     private var actionbar: ActionBar? = null
     private lateinit var homeFragment: HomeFragment
+    private lateinit var user: User
+    private val prefs: SharedPref by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_nav_drawer)
+        setContentView(R.layout.activity_main)
+        user = intent.getSerializableExtra(Constants.USER) as User
+        Logger.msg("accepted", user)
 
         //toolbar
         setSupportActionBar(toolbar_main)
@@ -35,10 +47,13 @@ class NavDrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         toggle.syncState()
 
         //navigation view
-        navigation_view_student_main.setNavigationItemSelectedListener(this)
+        navigation_view_main.setNavigationItemSelectedListener(this)
 
-//        var headerView = navigation_view_student_main.getHeaderView(0)
-//        var navUsername = headerView.findViewById<TextView>(R.id.text_view_student_navigation_header_email)
+        val headerView = navigation_view_main.getHeaderView(0)
+        val navUsername = headerView.findViewById<TextView>(R.id.text_view_mail)
+        val navName = headerView.findViewById<TextView>(R.id.text_view_nav_name)
+        navUsername.text = user.email
+        navName.text = user.name
 
         //default page
         actionbar?.apply {
@@ -48,7 +63,6 @@ class NavDrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         homeFragment = HomeFragment.newInstance()
         createFragment(homeFragment, R.id.container_main)
     }
-
 
     override fun onNavigationItemSelected(p0: MenuItem): Boolean {
         when (p0.itemId) {
@@ -64,6 +78,12 @@ class NavDrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             R.id.nav_more -> { }
             R.id.nav_settings -> {
                 openAboutDialog()
+            }
+            R.id.nav_logout -> {
+                prefs.clearUserEmail()
+                prefs.clearUserPassword()
+                startActivity(Intent(this, LoginActivity::class.java))
+                finish()
             }
         }
         nav_main_drawer.closeDrawer(GravityCompat.START)
