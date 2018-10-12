@@ -8,7 +8,8 @@ import kz.batana.lab3.core.Constants
 import kz.batana.lab3.core.local_storage.AppLocalDatabase
 import kz.batana.lab3.core.local_storage.SharedPref
 import kz.batana.lab3.core.local_storage.SharedPrefImpl
-import kz.batana.lab3.home.news.NewsDao
+import kz.batana.lab3.home.news.TodoDao
+import kz.batana.midterm.auth.authModule
 import kz.batana.midterm.main.mainModule
 import kz.darlogistics.courier.core.coreModule
 import org.koin.android.ext.koin.androidContext
@@ -19,7 +20,8 @@ val appModules: List<Module>
     get() = listOf(
             localStorageModules,
             coreModule,
-            mainModule
+            mainModule,
+            authModule
     )
 
 val localStorageModules = module {
@@ -36,7 +38,7 @@ internal fun createSharedPrefs(context: Context) : SharedPreferences {
 }
 
 internal fun createLocalStorage(context:Context) : AppLocalDatabase {
-    return Room.databaseBuilder(context, AppLocalDatabase::class.java,"database")
+    return Room.databaseBuilder(context, AppLocalDatabase::class.java,"newBD")
             .fallbackToDestructiveMigration()
             .allowMainThreadQueries()
             .build()
@@ -46,7 +48,7 @@ internal fun provideUserDao(appDB: AppLocalDatabase): UserDao {
     return appDB.userDao()
 }
 
-internal fun provideNewsDao(appDB: AppLocalDatabase): NewsDao {
+internal fun provideNewsDao(appDB: AppLocalDatabase): TodoDao {
     return appDB.newsDao()
 }
 

@@ -1,11 +1,15 @@
-package kz.batana.midterm.core.entity
+package kz.batana.lab3.core.entity
 
-import com.google.gson.annotations.SerializedName
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.PrimaryKey
+import java.io.Serializable
 
-
+@Entity(tableName = "todo")
 data class Todo(
-        @SerializedName("userId") val userId: Int,
-        @SerializedName("id") val id: Int,
-        @SerializedName("title") val title: String,
-        @SerializedName("completed") val completed: Boolean
-)
+        @PrimaryKey(autoGenerate = true)
+        var id: Int,
+        var title : String,
+        var desc : String,
+        var done: Int,
+        var user_email: String
+) : Serializable
