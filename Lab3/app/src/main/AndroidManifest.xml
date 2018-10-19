@@ -18,21 +18,23 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".news_details.NewsDetailsActivity" />
         <activity
-            android:theme="@style/AppThemeAuth"
-            android:name=".auth.LoginActivity" />
+            android:name=".auth.LoginActivity"
+            android:theme="@style/AppThemeAuth" />
         <activity
-            android:theme="@style/AppThemeAuth"
-            android:name=".auth.RegisterActivity" />
+            android:name=".auth.RegisterActivity"
+            android:theme="@style/AppThemeAuth" />
         <activity
-            android:theme="@style/AppThemeAuth"
-            android:name=".SplashActivity">
+            android:name=".SplashActivity"
+            android:theme="@style/AppThemeAuth">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".home.news_form.NewsFormActivity"></activity>
+        <activity android:name=".home.news_form.NewsFormActivity" />
+        <activity android:name=".home.todo.TodoActivity" />
+        <activity android:name=".home.todo.NewTodoActivity"></activity>
     </application>
 
 </manifest>

@@ -22,6 +22,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
 }
 
 dependencies {
@@ -47,6 +51,14 @@ dependencies {
 //    RxJava
     implementation "io.reactivex.rxjava2:rxjava:${rxJava_version}"
     implementation "io.reactivex.rxjava2:rxandroid:${rxAndroid_version}"
+
+//    Retrofit
+    implementation "com.squareup.okhttp3:okhttp:${okhttp_version}"
+    implementation "com.squareup.okhttp3:logging-interceptor:${okhttp_version}"
+    implementation "com.squareup.retrofit2:retrofit:${retrofit_version}"
+    implementation "com.squareup.retrofit2:converter-gson:${retrofit_version}"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:${retrofit_version}"
+    implementation "com.google.code.gson:gson:${gson_version}"
 
 //    Room
     implementation 'android.arch.persistence.room:runtime:1.1.1'

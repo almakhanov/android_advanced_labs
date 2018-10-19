@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import kz.batana.lab3.auth.UserDao
 import kz.batana.lab3.auth.authModule
 import kz.batana.lab3.core.Constants
+import kz.batana.lab3.core.coreModule
 import kz.batana.lab3.core.local_storage.AppLocalDatabase
 import kz.batana.lab3.core.local_storage.SharedPref
 import kz.batana.lab3.core.local_storage.SharedPrefImpl
@@ -19,7 +20,8 @@ val appModules: List<Module>
     get() = listOf(
             homeModule,
             localStorageModules,
-            authModule
+            authModule,
+            coreModule
     )
 
 val localStorageModules = module {

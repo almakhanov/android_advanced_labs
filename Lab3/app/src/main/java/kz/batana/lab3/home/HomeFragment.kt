@@ -9,11 +9,12 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_home.*
 import kz.batana.lab3.R
 import kz.batana.lab3.home.news.NewsFragment
+import kz.batana.lab3.home.todo.TodoFragment
 
 class HomeFragment : Fragment() {
 
     private lateinit var recentNewsFragment: NewsFragment
-    private lateinit var categoryFragment: CategoryFragment
+    private lateinit var categoryFragment: TodoFragment
 
     companion object {
         @JvmStatic
@@ -31,7 +32,7 @@ class HomeFragment : Fragment() {
         //View pager fragments
         val adapter = HomeFragmentPagerAdapter(childFragmentManager)
         recentNewsFragment = NewsFragment.newInstance()
-        categoryFragment = CategoryFragment.newInstance()
+        categoryFragment = TodoFragment.newInstance()
 
         adapter.addFragment(recentNewsFragment, resources.getString(R.string.tab_title1))
         adapter.addFragment(categoryFragment, resources.getString(R.string.tab_title2))
