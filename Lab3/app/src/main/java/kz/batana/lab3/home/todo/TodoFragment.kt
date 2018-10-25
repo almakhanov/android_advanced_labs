@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.fragment_todo.*
 import kz.batana.khanproject.Logger
 import kz.batana.lab3.R
 import kz.batana.lab3.core.Constants
+import kz.batana.lab3.core.entity.Post
 import kz.batana.lab3.core.entity.Todo
 import org.koin.android.ext.android.inject
 
@@ -59,9 +60,9 @@ class TodoFragment : Fragment(), TodoContract.View, TodosAdapter.TodoItemClicked
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == 1){
             if(resultCode == Activity.RESULT_OK){
-                val todo = data?.getSerializableExtra(Constants.TODO) as Todo
-//                presenter.addTodo(todo)
-                msg(todo.toString())
+                val todo = data?.getSerializableExtra(Constants.POST) as Post
+                Logger.msg("accepted", "getSerializableExtra: $todo")
+                presenter.setPost(todo)
             }
         }
     }

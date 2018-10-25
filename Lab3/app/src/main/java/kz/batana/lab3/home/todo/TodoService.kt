@@ -1,9 +1,9 @@
 package kz.batana.lab3.home.todo
 
 import io.reactivex.Observable
+import kz.batana.lab3.core.entity.Post
 import kz.batana.lab3.core.entity.Todo
-import retrofit2.http.GET
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface TodoService {
 
@@ -13,5 +13,7 @@ interface TodoService {
     @GET("todos/{id}")
     fun getTodo(@Path("id") id: Int) : Observable<Todo>
 
-
+    @POST("posts")
+    @Headers("Content-Type: application/json")
+    fun setPost(@Body post: Post) : Observable<Post>
 }

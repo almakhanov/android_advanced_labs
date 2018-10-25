@@ -5,6 +5,7 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kz.batana.lab3.core.entity.News
+import kz.batana.lab3.core.entity.Post
 import kz.batana.lab3.core.entity.Todo
 import kz.batana.lab3.home.news.NewsDao
 import kz.batana.lab3.home.todo.TodoService
@@ -20,6 +21,12 @@ class HomeRepository(private val newsDao: NewsDao,
 
     override fun getTodo(id: Int): Observable<Todo> {
         return service.getTodo(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    override fun setPost(post: Post): Observable<Post>{
+        return service.setPost(post)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
     }

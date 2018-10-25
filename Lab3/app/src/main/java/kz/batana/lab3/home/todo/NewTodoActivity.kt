@@ -12,7 +12,7 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_new_todo.*
 import kz.batana.lab3.R
 import kz.batana.lab3.core.Constants
-import kz.batana.lab3.core.entity.Todo
+import kz.batana.lab3.core.entity.Post
 import java.io.Serializable
 
 class NewTodoActivity : AppCompatActivity() {
@@ -27,7 +27,7 @@ class NewTodoActivity : AppCompatActivity() {
             this.setDisplayHomeAsUpEnabled(true)
             this.setDisplayShowHomeEnabled(true)
             this.setHomeAsUpIndicator(R.drawable.ic_arrow_back_black_24dp)
-            this.title = "Todo Form"
+            this.title = "Post Form"
         }
     }
 
@@ -45,16 +45,17 @@ class NewTodoActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val title = edit_text_add_todo_title.text.toString()
         val id = edit_text_add_todo_id.text.toString().toInt()
-        val userId = edit_text_add_todo_user_id.text.toString().toInt()
-        val completed =  checkbox_todo_completed.isChecked
+        val postId = edit_text_add_todo_user_id.text.toString().toInt()
+        val email = edit_text_add_todo_email.text.toString()
+        val body = edit_text_add_post_body.text.toString()
         return when (item.itemId) {
             R.id.item_teacher_add_course -> {
                 if(title.isEmpty()){
                     message("Fill the all fields!")
                 }else {
                     val resultIntent = Intent()
-                    resultIntent.putExtra(Constants.TODO, Todo(
-                            userId, id, title, completed
+                    resultIntent.putExtra(Constants.POST, Post(
+                            postId, id, title, email, body
                     ) as Serializable)
                     setResult(Activity.RESULT_OK, resultIntent)
                     finish()
