@@ -1,35 +1,31 @@
-package kz.batana.lab3
+package kz.batana.finalandroid
 
 import android.arch.persistence.room.Room
 import android.content.Context
 import android.content.SharedPreferences
-import kz.batana.lab3.auth.UserDao
-import kz.batana.lab3.auth.authModule
-import kz.batana.lab3.core.Constants
-import kz.batana.lab3.core.coreModule
-import kz.batana.lab3.core.local_storage.AppLocalDatabase
-import kz.batana.lab3.core.local_storage.SharedPref
-import kz.batana.lab3.core.local_storage.SharedPrefImpl
-import kz.batana.lab3.home.homeModule
-import kz.batana.lab3.home.news.NewsDao
+import kz.batana.finalandroid.add_contact.addModule
+import kz.batana.finalandroid.core.coreModule
+import kz.batana.finalandroid.core.local_storage.*
+import kz.batana.finalandroid.core.util.Constants
+import kz.batana.finalandroid.main.mainModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module.Module
 import org.koin.dsl.module.module
 
 val appModules: List<Module>
     get() = listOf(
-            homeModule,
             localStorageModules,
-            authModule,
-            coreModule
+            coreModule,
+            mainModule,
+            addModule
     )
 
 val localStorageModules = module {
     single { createSharedPrefs(androidContext()) }
     single { SharedPrefImpl(get()) as SharedPref }
     single { createLocalStorage(androidContext()) }
-    single { provideNewsDao(get()) }
-    single { provideUserDao(get()) }
+    single { provideGroupDao(get()) }
+    single { provideContactDao(get()) }
 }
 
 
@@ -38,16 +34,17 @@ internal fun createSharedPrefs(context: Context) : SharedPreferences {
 }
 
 internal fun createLocalStorage(context:Context) : AppLocalDatabase {
-    return Room.databaseBuilder(context, AppLocalDatabase::class.java,"database")
+    return Room.databaseBuilder(context, AppLocalDatabase::class.java,"final_db3")
             .fallbackToDestructiveMigration()
+            .allowMainThreadQueries()
             .build()
 }
 
-internal fun provideUserDao(appDB: AppLocalDatabase): UserDao {
-    return appDB.userDao()
+internal fun provideContactDao(appDB: AppLocalDatabase): ContactDao {
+    return appDB.contactDao()
 }
 
-internal fun provideNewsDao(appDB: AppLocalDatabase): NewsDao {
-    return appDB.newsDao()
+internal fun provideGroupDao(appDB: AppLocalDatabase): GroupDao {
+    return appDB.groupDao()
 }
 
